@@ -1,0 +1,10 @@
+Package: DWR
+Title: A simple interface to scraping data from the Department of Water Resources
+Description: This provides a simple, but relatively general function for reading data from  tables 
+  on Web pages served by the California Data Exchange Center.
+  This was originally written as an example of how to scrape the data from 4 different pages but is 
+  slightly more general now.
+Author: Duncan Temple Lang & ...?
+Maintainer: Duncan Temple Lang <duncan@r-project.org>
+Version: 0.1-0
+License: BSD
