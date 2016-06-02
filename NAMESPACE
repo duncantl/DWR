@@ -1,3 +1,4 @@
+import(XML)
 export(getMonthly)
 export(getStationIDs)
 

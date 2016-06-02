@@ -8,3 +8,4 @@ Author: Duncan Temple Lang & ...?
 Maintainer: Duncan Temple Lang <duncan@r-project.org>
 Version: 0.1-0
 License: BSD
+Imports: XML

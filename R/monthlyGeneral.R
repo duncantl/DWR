@@ -1,7 +1,11 @@
 getMonthly =
     #
     # getMonthly(u = "http://cdec.water.ca.gov/cgi-progs/queryMonthly?MRC")
+    # getMonthly(u = "http://cdec.water.ca.gov/cgi-progs/queryMonthly?BBS", which = 2)
+    
     # getMonthly(u = "http://cdec.water.ca.gov/cgi-progs/queryF?SHA")
+    # getMonthly(u = "http://cdec.water.ca.gov/cgi-progs/queryF?BBS")
+    
     # o = getMonthly(u = "http://cdec.water.ca.gov/cgi-progs/stages/FNFSUM", colClasses = c("character", rep("FormattedInteger", 14)))
     # o = getMonthly(u = "http://cdec.water.ca.gov/cgi-progs/stages/FNFSUM")  # don't need the colClasses
     
@@ -12,7 +16,9 @@ function(station = "MRC", u = sprintf("http://cdec.water.ca.gov/cgi-progs/queryM
     if(length(tt) == 0)
        return(list())
 
-    tt = tt[[1]]
+    if(!is.data.frame(tt))   # if the caller specified which, tt will be a data frame
+       tt = tt[[1]]
+    
     tt = tt[ names(tt) != "" ]
     names(tt) = gsub("&nbsp", "", names(tt))
 
@@ -40,13 +46,10 @@ function(col)
   col[miss] = NA
 
 
-  if(all(is.na(col) | grepl("^[0-9,]+$", col)))
+  if(all(is.na(col) | grepl("^[-0-9,]+$", col)))
      return(as(col, "FormattedInteger"))  
   
-  if(all(is.na(col) | grepl("^[0-9]+$", col)))
-     return(as.integer(col))
-
-  if(all(is.na(col) | grepl("^[0-9,.]+$", col)))
+  if(all(is.na(col) | grepl("^[-0-9,.]+$", col)))
      return(as(col, "FormattedNumber"))
   
   if(all(is.na(col) | grepl("^[0-9.]+$", col)))
