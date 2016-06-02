@@ -4,6 +4,7 @@ getMonthly =
     # getMonthly(u = "http://cdec.water.ca.gov/cgi-progs/queryF?SHA")
     # o = getMonthly(u = "http://cdec.water.ca.gov/cgi-progs/stages/FNFSUM", colClasses = c("character", rep("FormattedInteger", 14)))
     # o = getMonthly(u = "http://cdec.water.ca.gov/cgi-progs/stages/FNFSUM")  # don't need the colClasses
+    
 function(station = "MRC", u = sprintf("http://cdec.water.ca.gov/cgi-progs/queryMonthly?%s", station),
           doc = htmlParse(u, encoding = "UTF8"), ...)
 {
@@ -54,8 +55,8 @@ function(col)
   if(all(is.na(col) | grepl("^[0-9]{2}/[0-9]{4}$", col)))
      return(as.Date(sprintf("1/%s", col), "%d/%m/%Y"))
 
-  if(all(is.na(col) | grepl("^[0-9]{2}/[0-9]{4}$", col)))
-     return(as.Date(sprintf("1/%s", col), "%d/%m/%Y"))
+  if(all(is.na(col) | grepl("^[0-9]{2}-[A-Z]+-[0-9]{4}$", col)))
+     return(as.Date(col, "%d-%b-%Y"))  
 
   if(all(is.na(col) | grepl("^[0-9]{2}/[0-9]{2}/[0-9]{4} [0-9]{2}:[0-9]{2}$", col)))  
      return(as.POSIXct(strptime(col, "%m/%d/%Y %H:%M")))
